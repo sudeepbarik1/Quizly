@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#6d4aff" />
+  <title>Quizly — General Knowledge Quiz</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="./" aria-label="Quizly home"><span class="brand-mark">Q</span>Quizly</a>
+      <button id="restart-top" class="text-button" type="button">Restart quiz</button>
+    </header>
+
+    <section id="welcome-screen" class="screen welcome-screen">
+      <div class="eyebrow">QUICK CHALLENGE</div>
+      <h1>How much do you <span>really</span> know?</h1>
+      <p class="lead">Ten fun general-knowledge questions. No pressure—just your brain against the clock.</p>
+      <div class="quiz-meta">
+        <div><strong>10</strong><span>Questions</span></div>
+        <div><strong>4</strong><span>Choices each</span></div>
+        <div><strong>∞</strong><span>No time limit</span></div>
+      </div>
+      <button id="start-button" class="primary-button" type="button">Start the quiz <span>→</span></button>
+    </section>
+
+    <section id="quiz-screen" class="screen quiz-screen hidden" aria-live="polite">
+      <div class="progress-row">
+        <span id="question-count">Question 1 of 10</span>
+        <span id="score-display">Score: 0</span>
+      </div>
+      <div class="progress-track"><div id="progress-bar" class="progress-bar"></div></div>
+      <article class="question-card">
+        <span id="category" class="category">SCIENCE</span>
+        <h2 id="question-text">Question goes here</h2>
+        <div id="answer-list" class="answer-list"></div>
+        <p id="feedback" class="feedback" role="status"></p>
+        <button id="next-button" class="primary-button next-button hidden" type="button">Next question <span>→</span></button>
+      </article>
+    </section>
+
+    <section id="results-screen" class="screen results-screen hidden">
+      <div class="confetti" aria-hidden="true">✦ &nbsp; ● &nbsp; ✦ &nbsp; ▲ &nbsp; ●</div>
+      <div class="eyebrow">QUIZ COMPLETE</div>
+      <h1 id="result-title">Nicely done!</h1>
+      <p id="result-summary" class="lead">You got 0 out of 10 right.</p>
+      <div class="score-orb"><strong id="final-score">0</strong><span>/ 10</span></div>
+      <button id="play-again-button" class="primary-button" type="button">Play again <span>↻</span></button>
+    </section>
+  </main>
+  <footer>Made for curious minds</footer>
+  <script src="script.js"></script>
+</body>
+</html>
