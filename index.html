@@ -21,6 +21,9 @@
       <div class="eyebrow">QUICK CHALLENGE</div>
       <h1>How much do you <span>really</span> know?</h1>
       <p class="lead">Ten fun general-knowledge questions. No pressure—just your brain against the clock.</p>
+      <label class="name-field" for="player-name">Your name <span>(optional)</span>
+        <input id="player-name" type="text" maxlength="24" placeholder="e.g. Aisha" autocomplete="name" />
+      </label>
       <div class="quiz-meta">
         <div><strong>10</strong><span>Questions</span></div>
         <div><strong>4</strong><span>Choices each</span></div>
@@ -50,6 +53,11 @@
       <h1 id="result-title">Nicely done!</h1>
       <p id="result-summary" class="lead">You got 0 out of 10 right.</p>
       <div class="score-orb"><strong id="final-score">0</strong><span>/ 10</span></div>
+      <p id="saved-score-message" class="saved-score-message"></p>
+      <section id="score-history" class="score-history hidden" aria-label="Your saved scores">
+        <h2>Your recent scores</h2>
+        <ol id="score-history-list"></ol>
+      </section>
       <button id="play-again-button" class="primary-button" type="button">Play again <span>↻</span></button>
     </section>
   </main>
