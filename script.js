@@ -23,6 +23,10 @@ const progress = document.querySelector('#progress-bar');
 const feedback = document.querySelector('#feedback');
 const next = document.querySelector('#next-button');
 let current = 0, score = 0, answered = false;
+const nameInput = document.querySelector('#player-name');
+const scoresKey = 'quizly-score-history';
+nameInput.value = localStorage.getItem('quizly-player-name') || '';
+const escapeHtml = value => value.replace(/[&<>'"]/g, character => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[character]));
 
 function show(screen) { [welcome, quiz, results].forEach(s => s.classList.add('hidden')); screen.classList.remove('hidden'); }
 function renderQuestion() {
@@ -47,7 +51,19 @@ function choose(index) {
 }
 function finish() {
   const titles = score === 10 ? 'Perfect score!' : score >= 7 ? 'Nicely done!' : score >= 4 ? 'Good effort!' : 'Keep exploring!';
-  document.querySelector('#result-title').textContent = titles; document.querySelector('#result-summary').textContent = `You got ${score} out of ${questions.length} right.`; document.querySelector('#final-score').textContent = score; show(results);
+  const player = nameInput.value.trim() || 'Guest';
+  localStorage.setItem('quizly-player-name', nameInput.value.trim());
+  const history = JSON.parse(localStorage.getItem(scoresKey) || '[]');
+  history.unshift({ player, score, date: new Date().toLocaleDateString() });
+  localStorage.setItem(scoresKey, JSON.stringify(history.slice(0, 5)));
+  document.querySelector('#result-title').textContent = titles;
+  document.querySelector('#result-summary').textContent = `You got ${score} out of ${questions.length} right.`;
+  document.querySelector('#final-score').textContent = score;
+  document.querySelector('#saved-score-message').textContent = `Saved for ${player} on this device.`;
+  const list = document.querySelector('#score-history-list');
+  list.innerHTML = history.map(entry => `<li><strong>${escapeHtml(entry.player)}: ${entry.score}/10</strong> <span>· ${entry.date}</span></li>`).join('');
+  document.querySelector('#score-history').classList.toggle('hidden', history.length === 0);
+  show(results);
 }
 function start() { current = 0; score = 0; show(quiz); renderQuestion(); }
 document.querySelector('#start-button').addEventListener('click', start);
